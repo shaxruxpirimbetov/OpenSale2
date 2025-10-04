@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "user",
     "stores",
     "products",
+    "appmanage",
     "corsheaders",
     "rest_framework"
 ]
