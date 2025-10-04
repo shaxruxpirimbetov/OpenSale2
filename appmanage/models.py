@@ -5,6 +5,7 @@ from django.db import models
 class Version(models.Model):
 	version = models.CharField(max_length=24)
 	description = models.TextField()
+	update_url = models.TextField()
 	created_at = models.DateTimeField(auto_now_add=True)
 	updated_at = models.DateTimeField(auto_now=True)
 	
