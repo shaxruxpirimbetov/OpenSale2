@@ -11,6 +11,11 @@ from .serializers import VersionSerializer
 
 class VersionApi(APIView):
 	permission_classes = [permissions.IsAuthenticated]
+	def get_permissions(self):
+		if self.request.method == "GET":
+			return [permissions.AllowAny()]
+		return [permissions.IsAuthenticated()]
+	
 	def get(self, request):
 		versions = Version.objects.all()
 		versions = VersionSerializer(versions, many=True).data
