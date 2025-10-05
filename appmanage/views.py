@@ -17,21 +17,21 @@ class VersionApi(APIView):
 		return Response({"status": True, "message": versions})
 	
 	def post(self, request):
-		version = request.data.get("version")
+		version_got = request.data.get("version")
 		description = request.data.get("description")
 		update_url = request.data.get("update_url")
 		
 		if not request.user.username == "shaxrux":
 			return Response({"status": False, "message": "Permission error"})
 		
-		if not all([version, description, update_url]):
+		if not all([version_got, description, update_url]):
 			return Response({"status": False, "message": "version and description are required"})
 		
-		version = Version.objects.filter(version=version).first()
+		version = Version.objects.filter(version=version_got).first()
 		if version:
 			return Response({"status": False, "message": "Version already exists"})
 		
-		version = Version.objects.create(version=version, description=description, update_url=update_url)
+		version = Version.objects.create(version=version_got, description=description, update_url=update_url)
 		version = VersionSerializer(version).data
 		return Response({"status": True, "message": version})
 
